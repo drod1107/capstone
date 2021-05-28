@@ -1,2 +1,2 @@
-# Savvy Coders State-Driven Single Page Application Example
+# V2 State-Driven Single Page App Capstone Project 
 
