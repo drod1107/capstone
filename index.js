@@ -52,10 +52,9 @@ function addEventListeners(st) {
     })
   );
 
-  // menu toggle to hamburger
   document
     .querySelector(".fa-bars")
     .addEventListener("click", () =>
-      document.querySelector("nav > ul").classList.toggle("hidden--mobile")
+      document.querySelector("nav > ul").classList.toggle(".hidden--mobile")
     );
 }
