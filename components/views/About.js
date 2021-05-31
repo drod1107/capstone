@@ -3,7 +3,7 @@ import html from "html-literal";
 export default () => html`
 <h2>Who and what is AnyGym for?</h2>
 
-<div class="flex aboutBox">
+<div class="container aboutBox">
 <!--First text box-->
     <h3 class="boxTitles">
         Gym Users
@@ -21,7 +21,7 @@ It's total fitness freedom. Just the way it ought to be.
     </p>
 </div>
 
-<div class="flex aboutBox">
+<div class="container aboutBox">
     <!--Second text box-->
         <h3 class="boxTitles">
             Big box or chain gym owners and operators
@@ -35,7 +35,7 @@ the cost of drop in's exceeds the monthly rate, they'll know it's right for them
         </p>
 </div>
 
-<div class="flex aboutBox">
+<div class="container aboutBox">
     <!--Third text box-->
         <h3 class="boxTitles">
             Boutique gym owners
@@ -52,7 +52,7 @@ the cost of drop in's exceeds the monthly rate, they'll know it's right for them
         </p>
 </div>
 
-<div class="flex aboutBox">
+<div class="container aboutBox">
     <!--Fourth text box-->
         <h3 class="boxTitles">
             Home Gym Owners
