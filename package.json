@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "server:watch": "nodemon --watch ./server -e js ./server/index.js",
     "parcel-build": "parcel build index.html && cp _redirects ./dist/",
-    "serve": "parcel index.html",
-    "watch": "nodemon --watch ./server -e js ./server/index.js"
+    "serve": "parcel index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -27,8 +28,13 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "dotenv": "^5.0.1",
+    "express": "^4.17.1",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.13",
+    "morgan": "^1.10.0",
     "navigo": "^7.1.3"
   }
 }

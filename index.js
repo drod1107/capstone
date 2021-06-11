@@ -4,23 +4,45 @@ import * as state from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
-import "./env";
+import dotenv from "./env";
 import html from "html-literal";
+
+require("dotenv").config();
 
 const router = new Navigo(window.location.origin);
 
-router.hooks({
-  before: (done, params) => {
-    axios
-      .get(`https://api.foursquare.com/v2/venues/search?ll=40.7,-74&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET&v=YYYYMMDDS`)
-      .then(response => {
-        response.data.forEach(place => {
-        state.Search.results.push(place);
-        });
-        done();
-      });
-  }
-});
+var curDate = function(sp) {
+  let today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1; //As January is 0.
+  var yyyy = today.getFullYear();
+
+  if (dd < 10) dd = "0" + dd;
+  if (mm < 10) mm = "0" + mm;
+  return mm + sp + dd + sp + yyyy;
+};
+console.log(curDate(""));
+
+let clientID = process.env.clientID;
+let clientSecret = process.env.clientSecret;
+
+// router.hooks({
+//   before: (done, params) => {
+//     axios
+//       .get(
+//         `https://api.foursquare.com/v2/venues/search?ll=40.7,-74&client_id=${clientID}&client_secret=${clientSecret}&v=${curDate}`
+//       )
+//       // handle the response from the API
+//       .then(response => {
+//         // for each post in the response Array,
+//         response.data.forEach(place => {
+//           // add it to state.Blog.posts
+//           state.Search.results.push(place);
+//         });
+//         done();
+//       });
+//   }
+// });
 
 router
   .on({
@@ -39,78 +61,21 @@ function render(st = state.Home) {
 
   router.updatePageLinks();
 
-  addEventListeners(st);
+  function addEventListeners(st) {
+    // add event listeners to Nav items for navigation
+    document.querySelectorAll("nav a").forEach(navLink =>
+      navLink.addEventListener("click", event => {
+        event.preventDefault();
+        render(state[event.target.title]);
+      })
+    );
 
-  router.hooks({
-    before: (done, params) => {
-      axios
-        .get("https://api.foursquare.com/v2/venues/search?ll=40.7,-74&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=YYYYMMDD
-        ")
-        // handle the response from the API
-        .then(response => {
-          // for each place in the response Array,
-          response.data.forEach(place => {
-            // add it to state.Search.results
-            state.Search.results.push(place);
-          });
-          done();
-        });
-    }
-  });
-
-
-  // const request = require('request');
-
-  // request(
-  //   {
-  //     url: 'https://api.foursquare.com/v2/venues/explore',
-  //     method: 'GET',
-  //     qs: {
-  //       client_id: 'CLIENT_ID',
-  //       client_secret: 'CLIENT_SECRET',
-  //       ll: '40.7243,-74.0018',
-  //       query: 'coffee',
-  //       v: '20180323',
-  //       limit: 1,
-  //     },
-  //   },
-  //   function(err, res, body) {
-  //     if (err) {
-  //       console.error(err);
-  //     } else {
-  //       console.log(body);
-  //     }
-  //   }
-  // );
-
-// function addEventListeners(st) {
-//   // add event listeners to Nav items for navigation
-//   document.querySelectorAll("nav a").forEach(navLink =>
-//     navLink.addEventListener("click", event => {
-//       event.preventDefault(st);
-//       render(state[event.target.title]);
-//     })
-//   );
-
-//   // add menu toggle to bars icon in nav bar
-//   document
-//     .querySelector(".fa-bars")
-//     .addEventListener("click", () =>
-//       document.querySelector("nav > ul").classList.toggle("hidden--mobile")
-//     );
-// }
-
-function addEventListeners(st) {
-  function toggle() {
-    let menu = document.getElementsByClassName(".hidden--mobile");
-    if (menu.style.display === "block") {
-      menu.style.display = "none";
-    } else {
-      menu.style.display = "block";
-    }
+    addEventListeners(st);
   }
 
   document
-    .getElementsByClassName("fa-bars")
-    .addEventListeners("click", toggle());
+    .querySelector(".fa-bars")
+    .addEventListener("click", () =>
+      document.querySelector("nav > ul").classList.toggle("hidden-mobile")
+    );
 }
