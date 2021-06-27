@@ -1,8 +1,11 @@
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
+require("dotenv").config();
 
 import html from "html-literal";
+
+let agKey = process.env.AG_KEY;
 
 export default () => html`
   {
@@ -15,7 +18,7 @@ export default () => html`
         before: (done, params) => {
           axios
             .get(
-              "https://api.mapbox.com/geocoding/v5/mapbox.places/gym.json?bbox=-90.687836,38.392844,-90.009311,38.922696&access_token=pk.eyJ1IjoiZHJvZDExMDciLCJhIjoiY2txZTR0cHk3MDV2OTJubnpmdDRoMGxyZyJ9.hIyue0w4CuKIARjWNzu5ew"
+              'https://api.mapbox.com/geocoding/v5/mapbox.places/gym.json?bbox=-90.687836,38.392844,-90.009311,38.922696&access_token=${agKey}'
             )
             .then(response => {
                 response.data.forEach(place => {
@@ -31,11 +34,11 @@ export default () => html`
   </h4>
   <div id="mapBox"></div>
   <script>
-    mapboxgl.accessToken = "YOUR_MAPBOX_ACCESS_TOKEN";
+    mapboxgl.accessToken = agKey;
 
     var map = new mapboxgl.Map({
       container: "mapBox",
-      style: "mapbox://styles/mapbox/light-v10",
+      style: "mapbox://styles/drod1107/ckpvjyyce3xtk18mnm3bnbblz",
       center: [-90.184776, 38.624691],
       zoom: 3
     });
