@@ -7,62 +7,39 @@ import html from "html-literal";
 export default () => html`
   {
 
+  <h1>Find AnyGym and get cracking</h1>
 
-    <h1>Find AnyGym and get cracking</h1>
-
-    <script>
-      let results = [];
-      function showResults () {
-        console.log results{};
-      }
-      }
-      function runRoute() {
-        router.hooks({
-          before: (done, params) => {
-            axios
-              .get(
-                "https://api.mapbox.com/geocoding/v5/mapbox.places/gyms.json?Saint%20Louis&access_token=pk.eyJ1IjoiZHJvZDExMDciLCJhIjoiY2twdmphNXRpMWwwczJvcWM3dnhqdXY0biJ9._FH1da_3oQ2IHdJqxEE2XA"
-              )
-              // handle the response from the API
-              <!-- .then(response => {
-                console.log(response.data) {
-
-                };
+  <script>
+    function runRoute() {
+      router.hooks({
+        before: (done, params) => {
+          axios
+            .get(
+              "https://api.mapbox.com/geocoding/v5/mapbox.places/gym.json?bbox=-90.687836,38.392844,-90.009311,38.922696&access_token=pk.eyJ1IjoiZHJvZDExMDciLCJhIjoiY2txZTR0cHk3MDV2OTJubnpmdDRoMGxyZyJ9.hIyue0w4CuKIARjWNzu5ew"
+            )
+            .then(response => {
+                response.data.forEach(place => {
+                  state.search.geojson.push(place);
                 });
                 done();
-              }); -->
-          }
-        });
-      }
-    </script>
-      <h4>
-        Check out these top notch gyms in your hood:
-      </h4>
-        <iframe
-          src='https://api.mapbox.com/styles/v1/mapbox/streets-v11.html?title=true&zoomwheel=true&access_token=pk.eyJ1IjoiZHJvZDExMDciLCJhIjoiY2twdmphNXRpMWwwczJvcWM3dnhqdXY0biJ9._FH1da_3oQ2IHdJqxEE2XA#15/38.624691/-90.184776' width='100%' height='400px' title='Mapbox Styles embed'>
-        </iframe>
-      </div>
-      <script>
-      map.on('load', function () {
-        map.addSource('gyms', {
-          "geojson-lines": {
-          "type": "geojson",
-          "data": "results"
-      }
-;
-
-        map.addLayer({
-        'id': 'gyms-layer',
-        'type': 'circle',
-        'source': 'gyms',
-        'paint': {
-        'circle-radius': 2,
-        'circle-stroke-width': 1,
-        'circle-color': 'gold',
-        'circle-stroke-color': 'purple'
-        }
-        });
+              });
       });
-      </script>
-  </body>
+    }
+  </script>
+  <h4>
+    Check out these top notch gyms in your hood:
+  </h4>
+  <div id="mapBox"></div>
+  <script>
+    mapboxgl.accessToken = "YOUR_MAPBOX_ACCESS_TOKEN";
+
+    var map = new mapboxgl.Map({
+      container: "mapBox",
+      style: "mapbox://styles/mapbox/light-v10",
+      center: [-90.184776, 38.624691],
+      zoom: 3
+    });
+    var geojson = {};
+    // code from the next step will go here!
+  </script>
 `;
