@@ -26,7 +26,6 @@ export default () => html`
               });
       });
     }
-    before: (done, params) => {
   </script>
   <h4>
     Check out these top notch gyms in your hood:
