@@ -4,24 +4,14 @@ import * as state from "./store";
 import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
+import dotenv from "./env";
+import html from "html-literal";
+
+require("dotenv").config();
 
 const router = new Navigo(window.location.origin);
 
-// router.hooks({
-//   before: (done, params) => {
-//     axios
-//       .get("https://jsonplaceholder.typicode.com/posts")
-//       // handle the response from the API
-//       .then(response => {
-//         // for each post in the response Array,
-//         response.data.forEach(post => {
-//           // add it to state.Blog.posts
-//           state.Blog.posts.push(post);
-//         });
-//         done();
-//       });
-//   }
-// });
+let AnyGym_API_Key = process.env.AnyGym_API_Key;
 
 router
   .on({
@@ -40,21 +30,21 @@ function render(st = state.Home) {
 
   router.updatePageLinks();
 
-  addEventListeners(st);
-}
+  function addEventListeners(st) {
+    // add event listeners to Nav items for navigation
+    document.querySelectorAll("nav a").forEach(navLink =>
+      navLink.addEventListener("click", event => {
+        event.preventDefault();
+        render(state[event.target.title]);
+      })
+    );
 
-function addEventListeners(st) {
-  // add event listeners to Nav items for navigation
-  document.querySelectorAll("nav a").forEach(navLink =>
-    navLink.addEventListener("click", event => {
-      event.preventDefault();
-      render(state[event.target.title]);
-    })
-  );
+    addEventListeners(st);
+  }
 
   document
     .querySelector(".fa-bars")
     .addEventListener("click", () =>
-      document.querySelector("nav > ul").classList.toggle(".hidden--mobile")
+      document.querySelector("nav > ul").classList.toggle("hidden-mobile")
     );
 }

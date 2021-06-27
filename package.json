@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node ./server/index.js",
+    "server:watch": "nodemon --watch ./server -e js ./server/index.js",
     "parcel-build": "parcel build index.html && cp _redirects ./dist/",
     "serve": "parcel index.html"
   },
@@ -11,22 +13,22 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "@types/dotenv": "^8.2.0",
     "html-literal": "^1.1.0",
+    "nodemon": "^2.0.7",
     "parcel-bundler": "^1.12.5",
-    "prettier": "1.19.1",
-    "stylelint": "^11.1.1",
-    "stylelint-config-prettier": "^6.0.0",
-    "stylelint-config-recommended": "^3.0.0",
-    "stylelint-prettier": "^1.1.1",
-    "stylelint-vscode": "^7.0.0-6"
+    "prettier": "1.19.1"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "dotenv": "^5.0.1",
+    "express": "^4.17.1",
     "lodash": "^4.17.21",
+    "mapbox-gl": "^2.3.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.14",
+    "morgan": "^1.10.0",
     "navigo": "^7.1.3"
   }
 }
