@@ -175,6 +175,14 @@ nav .fa-bars {
   margin-left: 0%;
 }
 
+#optIn {
+  text-align: center;
+}
+
+iframe {
+
+}
+
 @media (max-width: 975px) {
   nav ul {
     display: none;

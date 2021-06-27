@@ -1,21 +1,28 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
+//These lines are always at the top, but below imports
 
-const dbConnect = process.env.DB_CONNECT || "http://localhost:4040";
-mongoose.connect(dbConnect);
+require("dotenv").config();
+const mongoose = require(`mongoose`);
+const express = require("express");
+const places = require("./controllers/places");
+
+const dbConnect = process.env.DB_CONNECT || "mongodb://localhost/places";
+mongoose.connect(process.env.DB_CONNECT);
 const app = express();
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
+
+db.on(`error`, console.error.bind(console, `connection error`));
 db.once(
   "open",
   console.log.bind(console, "Successfully opened connection to Mongo!")
 );
+
+//Middleware
 const myMiddleware = (request, response, next) => {
   // do something with request and/or response
-  request.foobar = "Savvy";
+  request.params.foobar = "Savvy";
   next(); // tell express to move to the next middleware function
 };
+
 // CORS Middleware
 const cors = (req, res, next) => {
   res.setHeader(
@@ -30,10 +37,14 @@ const cors = (req, res, next) => {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 };
+
+//converts json string data from front end to actual json object to use or store in backend
 app.use(express.json());
 app.use(myMiddleware); // use the myMiddleware for every request to the app
 app.use(cors);
-//testing app
+// app.use("/pizzas", pizzas);
+// app.use("/orders", orders);
+
 app
   .route("/")
   .get((request, response) => {
@@ -43,9 +54,76 @@ app
     response.json(request.body);
   });
 
-//always last or it will catch any null
+// //Create Schema
+// const pizzaSchema = new mongoose.Schema({
+//   crust: String,
+//   cheese: String,
+//   sauce: String,
+//   toppings: [String]
+// });
+// //Convert Schema into model with CRUD operators
+// const Pizza = mongoose.model("Pizza", pizzaSchema);
+
+// //Create route
+// app.post("/pizzas", (request, response) => {
+//   const newPizza = new Pizza(request.body);
+//   newPizza.save((err, pizza) => {
+//     return err ? response.sendStatus(500).json(err) : response.json(pizza);
+//   });
+// });
+
+// app.get("/pizzas", (request, response) => {
+//   Pizza.find({}, (error, data) => {
+//     if (error) return response.sendStatus(500).json(error);
+//     return response.json(data);
+//   });
+// });
+
+// app.get("/pizzas/:id", (request, response) => {
+//   Pizza.findById(request.params.id, (error, data) => {
+//     if (error) return response.sendStatus(500).json(error);
+//     return response.json(data);
+//   });
+// });
+
+// app.delete("/pizzas/:id", (request, response) => {
+//   Pizza.findByIdAndRemove(request.params.id, {}, (error, data) => {
+//     if (error) return response.sendStatus(500).json(error);
+//     return response.json(data);
+//   });
+// });
+
+// app.put("/pizzas/:id", (request, response) => {
+//   Pizza.findByIdAndUpdate(
+//     request.params.id,
+//     {
+//       $set: {
+//         crust: request.body.crust,
+//         cheese: request.body.cheese,
+//         sauce: request.body.sauce,
+//         toppings: request.body.sauce
+//       }
+//     },
+//     (error, data) => {
+//       if (error) return response.sendStatus(500).json(error);
+//       return response.json(request.body);
+//     }
+//   );
+// });
+
+// app.route("/pizzas/:id").get((request, response) => {
+//   // express adds a "params" Object to requests
+//   const id = request.params.id;
+//   // handle GET request for post with an id of "id"
+//   response.status(418).json({
+//     id: id
+//   });
+// });
+
 app.route("/**").get((request, response) => {
   response.status(404).send("NOT FOUND");
 });
-const PORT = process.env.PORT || 4040; // we use || to provide a default value
-app.listen(4040, () => console.log("Listening on port 4040"));
+
+//This line is always last
+const PORT = process.env.PORT || 4040;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
