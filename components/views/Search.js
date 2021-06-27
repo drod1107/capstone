@@ -8,8 +8,6 @@ import html from "html-literal";
 let agKey = process.env.AG_KEY;
 
 export default () => html`
-  {
-
   <h1>Find AnyGym and get cracking</h1>
 
   <script>
