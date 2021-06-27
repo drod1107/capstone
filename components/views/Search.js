@@ -13,21 +13,41 @@ export default () => html`
   <h1>Find AnyGym and get cracking</h1>
 
   <script>
-    function runRoute() {
-      router.hooks({
+        function runRoute() {
+          router.hooks({
+            before: (done, params) => {
+              axios
+                .get(
+                  'https://api.mapbox.com/geocoding/v5/mapbox.places/gym.json?bbox=-90.687836,38.392844,-90.009311,38.922696&access_token=${agKey}'
+                )
+                .then(response => {
+                    response.data.forEach(place => {
+                      state.search.geojson.push(place);
+                    });
+                    done();
+                  });
+          });
+        }
         before: (done, params) => {
-          axios
-            .get(
-              'https://api.mapbox.com/geocoding/v5/mapbox.places/gym.json?bbox=-90.687836,38.392844,-90.009311,38.922696&access_token=${agKey}'
-            )
-            .then(response => {
-                response.data.forEach(place => {
-                  state.search.geojson.push(place);
-                });
-                done();
-              });
-      });
-    }
+        const page =
+          params && params.hasOwnProperty("page")
+            ? capitalize(params.page)
+            : "Home";
+        switch (page) {
+          case "Places":
+            state.Search.results = [];
+            axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/gym.json?bbox=-90.687836,38.392844,-90.009311,38.922696&access_token=${agKey}').then(response => {
+                    response.data.forEach(place => {
+                      state.search.geojson.push(place);
+                    });
+                    done();
+            });
+            break;
+          default:
+            done();
+        }
+      }
+    });
   </script>
   <h4>
     Check out these top notch gyms in your hood:
