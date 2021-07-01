@@ -1,4 +1,4 @@
 export default {
-  header: "",
+  header: "You are welcome at AnyGym",
   view: "Home"
 };
