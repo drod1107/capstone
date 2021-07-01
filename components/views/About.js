@@ -2,7 +2,6 @@ import html from "html-literal";
 
 export default () => html`
   <h2>Who and what is AnyGym for?</h2>
-
   <div class="container aboutBox">
     <!--First text box-->
     <h3 class="boxTitles">
@@ -25,7 +24,6 @@ export default () => html`
       freedom. Just the way it ought to be.
     </p>
   </div>
-
   <div class="container aboutBox">
     <!--Second text box-->
     <h3 class="boxTitles">
@@ -42,7 +40,6 @@ export default () => html`
       monthly rate, they'll know it's right for them.
     </p>
   </div>
-
   <div class="container aboutBox">
     <!--Third text box-->
     <h3 class="boxTitles">
@@ -62,7 +59,6 @@ export default () => html`
       fans all over your area need your gym. Let us help you show them why.
     </p>
   </div>
-
   <div class="container aboutBox">
     <!--Fourth text box-->
     <h3 class="boxTitles">
@@ -90,7 +86,6 @@ export default () => html`
   <h3>AnyGym is democratizing fitness for all.</h3>
   <br />
   <br />
-
   <p id="optIn">
     Want to be a part of the revolution? <br />Make sure you're opted in and be
     the first to hear about new updates as we build this new empire together!

@@ -147,7 +147,7 @@ export default () => html`
       </div>
       <div>
         <input type="checkbox" id="night" name="night" />
-        <label for="night">2pm-6pm</label>
+        <label for="night">6pm-6am</label>
       </div>
       <br />
     </div>

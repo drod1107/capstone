@@ -7,40 +7,11 @@ import html from "html-literal";
 
 let agKey = process.env.AG_KEY;
 
-export default () => html`
+export default (st) => html`
   <h1>Find AnyGym and get cracking</h1>
-
-  <script>
-    function runRoute() {
-      router.hooks({
-        before: (done, params) => {
-          axios
-            .get(
-              'https://api.mapbox.com/geocoding/v5/mapbox.places/gym.json?bbox=-90.687836,38.392844,-90.009311,38.922696&access_token=${agKey}'
-            )
-            .then(response => {
-                response.data.forEach(place => {
-                  state.search.geojson.push(place);
-                });
-                done();
-              });
-      });
-    }
-  </script>
+  <pre><code>${st.geojson}</code></pre>
   <h4>
     Check out these top notch gyms in your hood:
   </h4>
   <div id="mapBox"></div>
-  <script>
-    mapboxgl.accessToken = agKey;
-
-    var map = new mapboxgl.Map({
-      container: "mapBox",
-      style: "mapbox://styles/drod1107/ckpvjyyce3xtk18mnm3bnbblz",
-      center: [-90.184776, 38.624691],
-      zoom: 3
-    });
-    var geojson = {};
-    // code from the next step will go here!
-  </script>
 `;
