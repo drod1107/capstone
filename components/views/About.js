@@ -71,7 +71,7 @@ export default () => html`
   <br />
   <br />
   <p id="optIn">
-    Want to be a part of the revolution? <br />Make sure you're opted in and be
-    the first to hear about new updates as we build this new empire together!
+    Want to be a part of the revolution? <br />
+    Make sure you're <a href="./Signup">opted in</a> and be the first to hear about new updates as we build this new empire together!
   </p>
 `;
