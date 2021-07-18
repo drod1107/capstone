@@ -13,8 +13,7 @@ export default () => html`
     <!-- </div> -->
     <div class="signupButton five">
       <a href="./Signup">
-        <button>Whoa. Wait! I'm new here. Sign me up!</button> </a
-      ><br />
+        <button>Whoa. Wait! I'm new here. Sign me up!</button> </a><br />
     </div>
   </div>
 `;

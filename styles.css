@@ -40,6 +40,39 @@ header {
   width: 100vw;
 }
 
+#pic1 {
+  background-image: url(./lib/Meditation.jpg);
+  height: 25vh;
+  width: 25vw;
+  background-size: cover;
+}
+
+#pic2 {
+  background-image: url(./lib/aptComplexGym.jpg);
+  height: 25vh;
+  width: 25vw;
+  background-size: cover;
+}
+
+#pic3 {
+  background-image: url(./lib/partnerWorkoutSitups.jpg);
+  height: 25vh;
+  width: 25vw;
+  background-size: cover;
+}
+
+#pic4 {
+  background-image: url(./lib/dumbellManChestPressB&W.jpg);
+  height: 25vh;
+  width: 25vw;
+  background-size: cover;
+}
+
+.aboutBox {
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
 .homepage {
   margin-bottom: 20%;
 }
